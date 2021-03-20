@@ -1,40 +1,32 @@
 import React, { useEffect, useState } from 'react';
 
-import { useNavigation } from '@react-navigation/native';
-import { Text, View, Image, FlatList, Alert } from 'react-native';
-import { Button } from 'react-native-paper';
+import { View, FlatList, Alert } from 'react-native';
+import Loader from 'react-native-spinkit';
 
 import ICharacters from '../../Interfaces/ICharacters';
 import api from '../../services/api';
 
+import Card from '../../components/Card';
+import styles from './styles';
+
 const Home: React.FC = () => {
   const [characters, setCharacters] = useState<ICharacters[]>([]);
-  const [refreshing, setRefreshing] = useState(false);
-  const navigation = useNavigation();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (refreshing) {
-      return;
-    }
-
     getCharacters();
-  }, [refreshing]);
-
-  const goToDetails = (characterID: number) => {
-    return navigation.navigate('Details', {
-      characterID,
-    });
-  };
+  }, []);
 
   const getCharacters = async () => {
+    setLoading(true);
+
     try {
       const { data } = await api.get('/characters');
-      console.log('asd');
-      setCharacters(data.data.results);
 
-      setRefreshing(false);
+      setCharacters(data.data.results);
+      setLoading(false);
     } catch (error) {
-      setRefreshing(false);
+      setLoading(false);
 
       Alert.alert(
         'Erro interno',
@@ -44,32 +36,17 @@ const Home: React.FC = () => {
   };
 
   return (
-    <View>
-      {characters.length ? (
+    <View style={styles.container}>
+      {loading ? (
+        <Loader type="WanderingCubes" color="#ffff" size={100} />
+      ) : (
         <FlatList
           data={characters}
-          refreshing={refreshing}
-          onRefresh={() => setRefreshing(true)}
+          style={styles.flatlist}
+          showsVerticalScrollIndicator={false}
           keyExtractor={character => String(character.id)}
-          renderItem={({ item: character }) => (
-            <View>
-              <Image
-                source={{
-                  height: 150,
-                  width: 220,
-                  uri: `${character.thumbnail.path}.${character.thumbnail.extension}`,
-                }}
-              />
-              <Text>{character.name}</Text>
-
-              <Button onPress={() => goToDetails(character.id)}>
-                Mais detalhes
-              </Button>
-            </View>
-          )}
+          renderItem={({ item: character }) => <Card character={character} />}
         />
-      ) : (
-        <Text>Olá? Tem alguém aí?</Text>
       )}
     </View>
   );
