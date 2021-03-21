@@ -2,8 +2,9 @@ import React from 'react';
 
 import { useNavigation } from '@react-navigation/native';
 
-import { Button, Title, Card as CardPaper } from 'react-native-paper';
-import ICharacter from '../../Interfaces/ICharacters';
+import { Button, Card as CardPaper } from 'react-native-paper';
+
+import ICharacter from '../../../Interfaces/ICharacter';
 
 import styles from './styles';
 
@@ -23,21 +24,28 @@ const Card: React.FC<IProps> = ({ character }: IProps) => {
   return (
     <CardPaper style={styles.card}>
       <CardPaper.Cover
+        fadeDuration={100}
         source={{
           uri: `${character.thumbnail.path}.${character.thumbnail.extension}`,
         }}
       />
 
       <CardPaper.Content style={styles.content}>
-        <Title style={styles.title}>{character.name}</Title>
+        <CardPaper.Title
+          titleStyle={styles.title}
+          titleNumberOfLines={3}
+          subtitleStyle={styles.subtitle}
+          subtitleNumberOfLines={4}
+          title={character.name}
+          subtitle={character.description}
+        />
       </CardPaper.Content>
 
       <Button
-        icon="plus-outline"
         mode="contained"
         style={styles.button}
         onPress={() => goToDetails(character.id)}>
-        Mais detalhes
+        Veja Mais
       </Button>
     </CardPaper>
   );
