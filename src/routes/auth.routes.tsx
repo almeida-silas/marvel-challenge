@@ -2,18 +2,16 @@ import React from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';
 
-import Home from '../../pages/Home';
-import Details from '../../pages/Details';
+import Authentication from '../pages/Authentication';
 
 const Stack = createStackNavigator();
 
 const StackNavigator: React.FC = () => {
   return (
     <Stack.Navigator
-      initialRouteName="Home"
+      initialRouteName="Auth"
       screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="Details" component={Details} />
+      <Stack.Screen name="Auth" component={Authentication} />
     </Stack.Navigator>
   );
 };
