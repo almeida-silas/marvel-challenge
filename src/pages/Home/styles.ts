@@ -3,20 +3,29 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 0,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#c2c2c2',
+    backgroundColor: '#e3f2fd',
   },
 
-  flatlist: {
+  containerButton: {
     flex: 1,
-    paddingVertical: 18,
+    flexDirection: 'row',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    marginBottom: 15,
+    justifyContent: 'space-around',
   },
 
-  text: {
-    fontSize: 20,
-    color: '#ffff',
+  button: {
+    height: 35,
+    width: 35,
+    backgroundColor: '#3949ab',
+    borderRadius: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

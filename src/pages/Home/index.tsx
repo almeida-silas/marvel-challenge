@@ -1,27 +1,33 @@
 import React, { useEffect, useState } from 'react';
 
-import { View, FlatList, Alert } from 'react-native';
+import { Button } from 'react-native-paper';
+import { View, Alert } from 'react-native';
 import Loader from 'react-native-spinkit';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import ICharacters from '../../Interfaces/ICharacters';
 import api from '../../services/api';
 
-import Card from '../../components/Card';
+import ICharacter from '../../Interfaces/ICharacter';
+
+import Carousel from '../../components/Carousel';
 import styles from './styles';
 
 const Home: React.FC = () => {
-  const [characters, setCharacters] = useState<ICharacters[]>([]);
+  const [characters, setCharacters] = useState<ICharacter[]>([]);
+  const [offset, setOffset] = useState(0);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    getCharacters();
-  }, []);
+    getCharacters(offset);
+  }, [offset]);
 
-  const getCharacters = async () => {
+  const getCharacters = async (page: number) => {
     setLoading(true);
 
     try {
-      const { data } = await api.get('/characters');
+      const { data } = await api.get('/characters', {
+        params: { offset: page },
+      });
 
       setCharacters(data.data.results);
       setLoading(false);
@@ -38,15 +44,31 @@ const Home: React.FC = () => {
   return (
     <View style={styles.container}>
       {loading ? (
-        <Loader type="WanderingCubes" color="#ffff" size={100} />
+        <Loader type="WanderingCubes" color="#3949ab" size={100} />
+      ) : characters.length ? (
+        <>
+          <View>
+            <Carousel characters={characters} />
+          </View>
+
+          <View style={styles.containerButton}>
+            <Button
+              style={styles.button}
+              mode="contained"
+              onPress={() => setOffset(offset - 20)}>
+              <Icon name="arrow-left" />
+            </Button>
+
+            <Button
+              style={styles.button}
+              mode="contained"
+              onPress={() => setOffset(offset + 20)}>
+              <Icon name="arrow-right" />
+            </Button>
+          </View>
+        </>
       ) : (
-        <FlatList
-          data={characters}
-          style={styles.flatlist}
-          showsVerticalScrollIndicator={false}
-          keyExtractor={character => String(character.id)}
-          renderItem={({ item: character }) => <Card character={character} />}
-        />
+        <View />
       )}
     </View>
   );
