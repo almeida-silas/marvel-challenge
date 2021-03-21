@@ -1,4 +1,4 @@
-interface IItems {
+export interface IItems {
   resourceURI: string;
   name: string;
 }
@@ -8,7 +8,7 @@ interface Urls {
   url: string;
 }
 
-interface ICharacterInfo {
+export interface ICharacterInfo {
   available: number;
   collectionURI: string;
   items: IItems[];
@@ -27,9 +27,9 @@ export default interface ICharacter {
   modified: string;
   resourceURI: string;
   thumbnail: IThumbnail;
-  comics: ICharacterInfo[];
-  series: ICharacterInfo[];
-  stories: ICharacterInfo[];
-  events: ICharacterInfo[];
+  comics: ICharacterInfo;
+  series: ICharacterInfo;
+  stories: ICharacterInfo;
+  events: ICharacterInfo;
   urls: Urls[];
 };
