@@ -1,5 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import IAuth from './IAuth';
 
 interface IAuthContextData {
@@ -7,7 +9,6 @@ interface IAuthContextData {
   name: string;
   email: string;
   signIn(user: IAuth): void;
-  signOut(): void;
 }
 
 const AuthContext = createContext<IAuthContextData>({} as IAuthContextData);
@@ -16,18 +17,27 @@ export const AuthProvider: React.FC = ({ children }) => {
   const [uname, setName] = useState('');
   const [uemail, setEmail] = useState('');
 
-  const loadStoragedData = async () => {};
+  const loadStoragedData = async () => {
+    try {
+      const name = await AsyncStorage.getItem('@name');
+      const email = await AsyncStorage.getItem('@email');
 
-  const signIn = (authUser: IAuth) => {
-    setEmail(authUser.email);
-    setName(authUser.name);
+      if (name && email) {
+        setName(name);
+        setEmail(email);
+      }
+    } catch (error) {}
   };
 
-  function signOut() {
-    /*AsyncStorage.clear(() => {
-      setUser(null);
-    });*/
-  }
+  const signIn = async (authUser: IAuth) => {
+    setEmail(authUser.email);
+    setName(authUser.name);
+
+    try {
+      await AsyncStorage.setItem('@name', authUser.name);
+      await AsyncStorage.setItem('@email', authUser.email);
+    } catch (error) {}
+  };
 
   useEffect(() => {
     loadStoragedData();
@@ -40,7 +50,6 @@ export const AuthProvider: React.FC = ({ children }) => {
         email: uemail,
         name: uname,
         signIn,
-        signOut,
       }}>
       {children}
     </AuthContext.Provider>
