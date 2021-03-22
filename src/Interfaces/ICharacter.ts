@@ -1,23 +1,14 @@
-export interface IItems {
-  resourceURI: string;
-  name: string;
-}
-
-interface Urls {
-  type: string;
-  url: string;
-}
+import IThumbnail from './IThumbnail';
 
 export interface ICharacterInfo {
   available: number;
   collectionURI: string;
-  items: IItems[];
-  returned: number;
-}
-
-interface IThumbnail {
-  path: string;
-  extension: string;
+  items: [
+    {
+      resourceURI: string;
+      name: string;
+    },
+  ];
 }
 
 export default interface ICharacter {
@@ -31,5 +22,10 @@ export default interface ICharacter {
   series: ICharacterInfo;
   stories: ICharacterInfo;
   events: ICharacterInfo;
-  urls: Urls[];
-};
+  urls: [
+    {
+      type: string;
+      url: string;
+    },
+  ];
+}
