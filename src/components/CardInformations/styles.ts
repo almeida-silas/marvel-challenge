@@ -5,16 +5,19 @@ const styles = StyleSheet.create({
     flex: 1,
     maxWidth: 300,
     height: '20%',
-    padding: 5,
+    padding: 10,
+    elevation: 3,
     paddingHorizontal: 20,
     borderRadius: 22,
-    marginVertical: 3,
+    marginVertical: 6,
     alignItems: 'center',
+    backgroundColor: '#ffff',
     justifyContent: 'center',
   },
 
   title: {
-    fontSize: 12,
+    fontSize: 13,
+    fontWeight: 'bold',
     textAlign: 'center',
   },
 });
