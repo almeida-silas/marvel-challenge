@@ -5,33 +5,39 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#e3f2fd',
-  },
-
-  titlePage: {
-    position: 'absolute',
-    right: '10%',
+    backgroundColor: '#e1e2e1',
   },
 
   img: {
-    width: 250,
-    height: 250,
-    borderRadius: 20,
+    width: '100%',
+    height: 300,
+    resizeMode: 'cover',
+  },
+
+  imageContainer: {
+    width: '100%',
+    height: 300,
   },
 
   title: {
     marginTop: 15,
+    fontSize: 22,
     letterSpacing: 1,
   },
 
+  paragraph: {
+    padding: 15,
+    textAlign: 'center',
+  },
+
   description: {
-    marginVertical: 10,
+    marginTop: 22,
+    fontSize: 19,
     textAlign: 'center',
   },
 
   card: {
     flex: 1,
-    padding: 15,
     paddingTop: 30,
   },
 
@@ -42,8 +48,13 @@ const styles = StyleSheet.create({
   },
 
   header: {
-    justifyContent: 'center',
+    flex: 1,
+    minWidth: '100%',
     alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#ffff',
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
   },
 
   stats: {
@@ -55,11 +66,17 @@ const styles = StyleSheet.create({
 
   appbar: {
     backgroundColor: '#ffff',
+    marginBottom: '-8%',
+    elevation: 9,
   },
 
   participationsContainer: {
     paddingVertical: 10,
-    borderBottomWidth: 0.4,
+    marginVertical: 7,
+    padding: 35,
+    borderRadius: 11,
+    backgroundColor: '#ffff',
+    elevation: 4,
   },
 
   button: {
