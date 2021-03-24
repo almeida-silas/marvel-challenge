@@ -25,7 +25,6 @@ const DetailsStories: React.FC<IProps> = ({ route, navigation }: IProps) => {
   const getDetailsStories = async (id: number) => {
     try {
       const { data } = await api.get(`/stories/${id}`);
-      console.log(storiesID);
       setStories(data.data.results[0]);
     } catch (error) {
       if (error.response.status === 404) {
@@ -64,10 +63,7 @@ const DetailsStories: React.FC<IProps> = ({ route, navigation }: IProps) => {
               )}
 
               <Card.Content style={styles.content}>
-                <Title style={styles.title}>
-                  {stories.title}
-                  {console.log(stories.title)}
-                </Title>
+                <Title style={styles.title}>{stories.title}</Title>
 
                 {stories.description.length > 0 && (
                   <>

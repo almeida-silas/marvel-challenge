@@ -7,7 +7,6 @@ export const goToStoriesID = (
   navigation: NavigationProp<ParamListBase>,
 ) => {
   const id = extractIDfromURI(uri);
-  console.log('esse', id, uri);
   if (id !== false) {
     return navigation.navigate('DetailsStories', { storiesID: id });
   }
