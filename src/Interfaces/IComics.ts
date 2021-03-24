@@ -34,7 +34,7 @@ export default interface IComics {
   dates: [
     {
       type: string;
-      date: Date;
+      date: string;
     },
   ];
   thumbnail: IThumbnail;

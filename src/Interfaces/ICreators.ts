@@ -1,25 +1,17 @@
-import IThumbnail from './IThumbnail';
-
-export default interface IStories {
+export default interface ICreators {
   id: number;
-  title: number;
-  description: string;
-  resourceURI: string;
-  type: string;
-  modified: Date;
-  thumbnail: IThumbnail;
-  creators: {
-    available: number;
-    collectionURI: string;
-    items: [
-      {
-        resourceURI: string;
-        name: string;
-        role: string;
-      },
-    ];
+  firstName: string;
+  middleName: string;
+  lastName: string;
+  suffix: string;
+  fullName: string;
+  modified: string;
+  thumbnail: {
+    path: string;
+    extension: string;
   };
-  characters: {
+  resourceURI: string;
+  comics: {
     available: number;
     collectionURI: string;
     items: [
@@ -39,24 +31,26 @@ export default interface IStories {
       },
     ];
   };
-  comics: {
+  stories: {
     available: number;
     collectionURI: string;
     items: [
       {
         resourceURI: string;
         name: string;
+        type: string;
       },
     ];
   };
   events: {
     available: number;
     collectionURI: string;
-    items: Object[];
-    returned: 0;
+    items: [];
   };
-  originalIssue: {
-    resourceURI: string;
-    name: string;
-  };
+  urls: [
+    {
+      type: string;
+      url: string;
+    },
+  ];
 }

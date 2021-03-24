@@ -1,14 +1,15 @@
 import IThumbnail from './IThumbnail';
 
+export interface IItems {
+  resourceURI: string;
+  name: string;
+  type: string;
+}
+
 export interface ICharacterInfo {
   available: number;
   collectionURI: string;
-  items: [
-    {
-      resourceURI: string;
-      name: string;
-    },
-  ];
+  items: IItems[];
 }
 
 export default interface ICharacter {
